@@ -290,19 +290,27 @@ uv run python -m player_detect.cli --video videos/okliga_prueba.mp4 --max-second
   --calibration config/calibration_okliga_prueba.yaml
 ```
 
-O en una sola orden, que calibra solo si hace falta y luego procesa:
+O en una sola orden, en lote: lee de `in/` y deja cada resultado en `output/<video>/`.
 
 ```bash
-./scripts/calibrate_and_detect.sh videos/noa_penalti.mp4 30        # 30 s, calibra si falta el YAML
-./scripts/calibrate_and_detect.sh videos/noa_penalti.mp4 30 --force --open
-./scripts/calibrate_and_detect.sh videos/noa_penalti.mp4 30 \
-  --points "1500,1400 3000,1350 3200,2000 1300,2100"    # sin GUI
+./scripts/calibrate_and_detect.sh                            # todos los vídeos de in/
+./scripts/calibrate_and_detect.sh noa_penalti 30             # uno de in/, 30 s
+./scripts/calibrate_and_detect.sh in/noa_penalti.mp4 30 --force --open
+./scripts/calibrate_and_detect.sh noa_penalti 30 \
+  --points "1500,1400 3000,1350 3200,2000 1300,2100"        # sin GUI
+```
+
+```text
+in/<video>.mp4  →  output/<video>/{<video>_annotated.mp4, minimap.mp4, heatmap.png,
+                                  heatmap_counts.json, positions.json, detections.json, tracks.json}
 ```
 
 El script reutiliza `config/calibration_<video>.yaml` si existe y es de ese vídeo con `frame: 0`; si no,
-calibra (GUI o `--points`), lanza el pipeline con `--tile auto` y el modelo de 3 clases, y al final lista
-los artefactos y avisa si faltan `minimap.mp4` o `heatmap.png`. Opciones: `--force`, `--points`,
-`--calibration FILE` (varios clips de la misma cámara) y `--open`.
+calibra (GUI de 4 clics o `--points`), lanza el pipeline con `--tile auto` y el modelo de 3 clases, y al
+final lista los artefactos y avisa si faltan `minimap.mp4` o `heatmap.png`. Con varios vídeos calibra cada
+uno por separado y continúa si alguno falla. Opciones: `--force`, `--points`, `--calibration FILE`
+(varios clips de la misma cámara) y `--open`. Crea `in/` y `output/` si no existen; ambas están en
+`.gitignore`.
 
 Genera además de lo habitual: minimapa incrustado en el vídeo, `minimap.mp4` (800x400 cenital),
 `heatmap.png` (un panel por equipo), `heatmap_counts.json` y `positions.json` con `x_m`/`y_m` por frame.
