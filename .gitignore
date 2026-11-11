@@ -35,6 +35,8 @@ outputs/
 # Datos pesados
 videos/
 dataset/images/raw/
+in/
+output/
 
 # Dataset generado por split_dataset.py (regenerable; los raw son la fuente de verdad)
 dataset/images/train/
