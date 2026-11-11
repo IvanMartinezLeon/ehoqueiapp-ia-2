@@ -1,0 +1,45 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Herramientas
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+.ruff_cache/
+.coverage
+htmlcov/
+pyrightconfig.json.bak
+
+# SO / editores
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Modelos y pesos (regenerables por descarga o entrenamiento)
+*.pt
+*.onnx
+*.engine
+*.torchscript
+
+# Salidas del pipeline (regenerables)
+runs/
+.runs/
+outputs/
+
+# Datos pesados
+videos/
+dataset/images/raw/
+
+# Dataset generado por split_dataset.py (regenerable; los raw son la fuente de verdad)
+dataset/images/train/
+dataset/images/val/
+dataset/labels/train/
+dataset/labels/val/
+dataset/data.yaml
+*.cache

@@ -1,0 +1,4 @@
+player
+goalkeeper
+referee
+ball

@@ -1,0 +1,22 @@
+video: videos/okliga_prueba.mp4
+frame: 0
+width_m: 40.0
+height_m: 20.0
+image_points:
+- - 3.0
+  - 190.0
+- - 849.0
+  - 197.0
+- - 11.0
+  - 469.0
+- - 841.0
+  - 467.0
+rink_points:
+- - 0.0
+  - 0.0
+- - 40.0
+  - 0.0
+- - 40.0
+  - 20.0
+- - 0.0
+  - 20.0

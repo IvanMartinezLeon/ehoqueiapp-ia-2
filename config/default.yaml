@@ -1,0 +1,41 @@
+# Default run configuration.
+# Every key maps to a field of player_detect.config.Settings.
+model: yolo11n.pt        # yolo11n/s/m/x.pt: bigger is slower
+conf: 0.35               # minimum detection confidence
+iou: 0.55                # NMS IoU threshold
+imgsz: 960               # inference resolution
+batch: 8                 # frames per call (1 when tile > 1 or tile_auto)
+tile: 1                  # NxN tiled inference (palau.mp4: 2 or 3)
+tile_overlap: 0.2        # relative overlap between tiles
+tile_auto: false         # tile=2 automatic when the long side is large
+tile_auto_min_side: 1920 # long-side threshold (px) for tile_auto
+tracker: bytetrack.yaml  # bytetrack|botsort|ocsort
+tracker_params: {}       # tracker overrides, e.g. {track_high_thresh: 0.15}
+device: auto             # auto | mps | cuda | cuda:0 | cpu
+max_seconds: null        # process only the first N seconds
+stride: 1                # process 1 of N frames, keep duration
+save_video: true         # write <name>_annotated.mp4
+save_json: true          # write detections.json and tracks.json
+draw_conf: true          # show confidence beside the track id
+detector_classes: [0]    # class indices to keep (custom model: [0,1,2])
+classify_teams: true     # color boxes by team (jersey colour)
+min_box_height: 40       # boxes shorter than this provide no colour sample
+min_color_samples: 8     # samples needed before a track is labelled
+classify_every: 15       # re-run k-means every N processed frames
+team_colors:             # BGR per label
+  team_a: [46, 190, 240]   # yellow
+  team_b: [235, 160, 60]   # blue
+  referee: [20, 20, 20]    # black
+  unknown: [180, 180, 180] # grey
+calibration: null        # YAML de calibración de pista (ruta)
+minimap: true            # incrustar minimapa top-down cuando hay calibración
+heatmap: true            # generar heatmap.png por equipo
+minimap_size: 0.22       # ancho del minimapa relativo al del vídeo
+min_inliers: 40          # inliers mínimos para aceptar la homografía de cámara
+pitch_margin_m: 2.0      # anillo de margen dibujado (m)
+pitch_max_offset_m: 15.0 # descartar solo proyecciones más allá de esto
+anchor_camera: true      # registrar cada frame contra el frame 0 (sin deriva)
+anchor_features: 3000    # features ORB para el anclaje
+world_anchor: true       # anclaje verificado por líneas (anti-deriva)
+world_max_residual_px: 20.0  # residual máximo aceptado al verificar
+world_anchor_interval: 5 # anclar cada N frames (LK en medio)
